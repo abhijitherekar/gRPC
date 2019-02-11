@@ -1,0 +1,32 @@
+syntax="proto3";
+package customer;
+
+//now define the services that customer will host
+service Customer {
+    rpc CreateCustomer (CustomerRequest) returns (CustomerResponse) {}
+    rpc GetCustomer(CustomerId) returns(stream CustomerRequest) {}
+}
+
+message CustomerRequest {
+    string name = 1;
+    string email = 2;
+    int32 id = 3;
+    string phone = 4;
+
+    message Address {
+        int32 house = 1;
+        string street = 2;
+        string city = 3;
+        string state = 4;
+        string country = 5;
+    }
+    repeated Address addr = 5;
+}
+
+message CustomerResponse {
+    bool success = 1;
+}
+
+message CustomerId {
+    string Keyword = 1;
+}
